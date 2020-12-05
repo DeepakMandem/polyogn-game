@@ -1,4 +1,6 @@
 var stand1,stand2
+var score = 0;
+var slingshot
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
@@ -37,8 +39,28 @@ function setup() {
 
 function draw() {
   background(255,255,255);  
-  
+  text("SCORE : "+score,750,40);
+  getTime();
   stand1.display();
+  
+  box1.score();
+ box2.score(); 
+ box3.score(); 
+ box4.score(); 
+ box5.score(); 
+ box6.score(); 
+ box7.score(); 
+ box8.score();
+ box9.score();
+ box10.score();
+ box11.score();
+ box12.score();
+ box13.score();
+ box14.score();
+ box15.score();
+ box16.score();
+
+  
   drawSprites();
 }
 
@@ -56,5 +78,22 @@ function mouseReleased(){
 function keyPressed(){
   if(keyCode === 32){
       slingshot.attach(box16.body);
+  }
+}
+
+async function getTime(){
+  var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Tokyo");
+  var responseJSON = await response.json()
+  
+  var daytime = responseJSON.datetime
+  var hour = daytime.slice(11,13)
+  console.log(hour)
+  
+  if(hour>=06 && hour<=19){
+  bg = "sprites/bg.png"
+  }
+
+  else{
+      bg = "sprites/bg2.png"
   }
 }
